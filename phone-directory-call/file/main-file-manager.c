@@ -90,15 +90,3 @@ void list(void){
     /*close the file*/
     fclose(ptr);
 }
-
-void search(void){
-    /*make the file pointer*/
-    FILE *ptr;
-
-    /*make variable*/
-    char output[2000], search[60];
-    int i;
-
-    /*read the file with output as a var*/
-    fread(&output, sizeof(char), 2000, ptr);
-}
