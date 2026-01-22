@@ -91,7 +91,6 @@ void list(void){
 
     /*close the file*/
     fclose(ptr);
-<<<<<<< HEAD
 }
 
 /*function search*/
