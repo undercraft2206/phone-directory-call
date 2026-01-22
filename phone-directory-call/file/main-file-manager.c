@@ -44,12 +44,14 @@ void add(void){
 
     ptr = fopen("phone.txt", "a");
 
-    fprintf(ptr, "name: %s\nnumero: %s", name, numero);
+    fprintf(ptr, "\nname: %s\nnumero: %s", name, numero);
 
     /*close the file*/
 
     fclose(ptr);
 }
+
+/*function list*/
 
 void list(void){
 
@@ -91,14 +93,78 @@ void list(void){
     fclose(ptr);
 }
 
+/*function search*/
+
 void search(void){
     /*make the file pointer*/
     FILE *ptr;
 
-    /*make variable*/
-    char output[2000], search[60];
-    int i;
+    if (ptr == NULL)
+    {
+        /*informate the user*/
+        perror("file not found");
+        printf("creating one...\n");
 
-    /*read the file with output as a var*/
-    fread(&output, sizeof(char), 2000, ptr);
+        /*create the file*/
+        fopen("phone.txt", "w");
+
+        /*print to restart the programme*/
+        printf("file created\nplease restart the programme");
+
+        /*close the file and exit with errore*/
+        fclose(ptr);
+        exit(-1);
+    }
+    
+
+    /*make variable*/
+    char output[1000], search[60];
+    int i = 1, num = 0;
+
+    /*take information*/
+    printf("name: ");
+    scanf("%s", &search);
+
+    /*clear cmd for windows */
+    system("cls");
+
+    /*take information*/
+    printf("name searched: '%s'\n\n", search);
+
+    /*open file in read mod*/
+    ptr = fopen("phone.txt", "r");
+
+    /*search the word*/
+    while (!feof(ptr)){
+
+        /*take the string and add it to output as a variable*/
+        fscanf(ptr, "%s", output);
+
+        /*look if string match with the word*/
+        if (strcmp(output, search) == 0 ){
+
+        /*add 1 to the variable to num*/
+        num++;
+
+        /*informate the user*/
+        printf("name: %s", output);
+
+        /*go to number after*/
+        fscanf(ptr, "%s", output);
+        fscanf(ptr, "%s", output);
+
+        /*print number of the user*/
+        printf("\nnumber: %s\n\n", output);
+        }        
+    }
+
+    if (num == 0)
+    {
+        printf("sorry... we don't found any %s in the file", search);
+        fclose(ptr);
+        exit(0);
+    } else{
+        printf("we found the name '%s' %d time\n\n", search, num);
+        fclose(ptr);
+    }
 }
