@@ -9,7 +9,7 @@ int main(void){
     system("cls");
     
     start:
-    printf("\nadd\nlist\nsearch\nremove\nexit\n\nuser: ");
+    printf("\nadd\nlist\nsearch\nremove\nrename\nexit\n\nuser: ");
 
     char choice[6];
     scanf("%s", &choice[0]);
