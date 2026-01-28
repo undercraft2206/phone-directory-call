@@ -34,12 +34,12 @@ int main(void){
         goto start;
     }
 
-    if (strcmp(choice, "rename")) {
+    if (strcmp(choice, "rename") == 0) {
         printf("\nthe function rename coming soon !\n");
         goto start;
     }
 
-    if (strcmp(choice, "exit")) {
+    if (strcmp(choice, "exit") == 0) {
         exit(0);
     }
 }
