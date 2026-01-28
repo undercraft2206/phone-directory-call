@@ -177,4 +177,9 @@ void remove_function(void){
     }
 
     fprintf(ptr, "\nend");
+
+    fclose(ptr);
+
+    fclose(tempo);
+    remove("tempo.txt");
 }
