@@ -9,7 +9,7 @@ void add_function(void){
 
     //clear the cli and say the name of function
 
-    system("cls0");
+    system("cls");
     printf("function add\n\n");
 
     //make file pointer
