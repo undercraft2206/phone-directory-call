@@ -444,7 +444,7 @@ void rename_function(void){
 
         //start the copy to tempo.txt
 
-        while(!feof(ptr) == 1){
+        while(!feof(ptr)){
 
             start:
 
@@ -562,4 +562,196 @@ void rename_function(void){
 
         printf("the name '%s' have been changed to '%s'", name, change);        
     }
+
+
+    if (strcmp(choice, "number") == 0)
+    {
+
+        char output[2000];
+        char name[60];
+        char number[60];
+
+        FILE *ptr;
+        FILE *tempo;
+
+        ptr = fopen("phone.txt", "r");
+        tempo = fopen("tempo.txt", "w");
+
+        if (ptr == NULL)
+        {
+
+            //informate the user
+
+            perror("file not found");
+            printf("creating one...\n");
+
+            //create the file
+
+            ptr = fopen("phone.txt", "w");
+            fprintf(ptr, "\nend");
+
+            //say to the user, file created !
+
+            printf("file created succesfully !");
+
+            //close file and delete tempo file
+
+            fclose(ptr);
+            fclose(tempo);
+            remove("tempo.txt");
+            
+            //exit
+
+            exit(0);
+
+        }
+
+        //ask user information
+
+        printf("which number (name): ");
+        scanf("%s", &name);
+        
+        printf("the new number will be: ");
+        scanf("%s", &number);
+
+        //copy phone.txt to tempo.txt with change
+
+        while (!feof(ptr))
+        {
+
+            //scan word in phone.txt
+
+            fscanf(ptr, "%s", output);
+
+            startverif:
+
+            //does the word is "end"
+
+            if (strcmp(output, "end") == 0)
+            {
+
+                //then stop the while
+
+                break;
+
+            }
+
+            //does the word match with the name searched
+
+            if (strcmp(output, name) == 0)
+            {
+
+                //print result to tempo.txt
+
+                fprintf(tempo, "%s\n%s\n", name, number);
+
+                //scan for next word
+
+                fscanf(ptr, "%s", output);
+                fscanf(ptr, "%s", output);
+                fscanf(ptr, "%s", output);
+
+                //go to startverif
+
+                goto startverif;
+            }
+
+            //does the word match with "name:" or "number:"
+
+            if (strcmp(output, "name:") == 0 || strcmp(output, "number:") == 0)
+            {
+
+                //scan the next word
+
+                fscanf(ptr, "%s", output);
+
+                //go to startverif
+
+                goto startverif;
+            }
+            
+            //print result to tempo file
+
+            fprintf(tempo, "%s\n", output);
+            
+        }
+
+        //print the end of the file
+
+        fprintf(tempo, "\n\nend");
+
+        //close file pointer
+
+        fclose(ptr);
+        fclose(tempo);
+
+        //open file for clear the file phone.txt
+        
+        ptr = fopen("phone.txt", "w");
+        tempo = fopen("tempo.txt", "r");
+
+        //copy file tempo.txt to phone.txt
+
+        while (!feof(tempo))
+        {
+
+            //scan for next word
+
+            fscanf(tempo, "%s", output);
+
+            //does the word match with "end"
+
+            if (strcmp(output, "end") == 0)
+            {
+
+                //exit the while
+                
+                break;
+
+            }
+            
+            //print result to phone.txt
+
+            fprintf(ptr, "name: %s", output);
+
+            //scan for next word
+
+            fscanf(tempo, "%s", output);
+
+            //does the word match with "end"
+
+            if (strcmp(output, "end") == 0)
+            {
+
+                //exit the while
+                
+                break;
+
+            }
+
+            //print result to phone.txt
+            
+            fprintf(ptr, "\nnumber: %s\n\n", output);
+
+        }
+
+        //print the end of the file
+
+        fprintf(ptr, "end");
+
+        //close file pointer
+
+        fclose(ptr);
+        fclose(tempo);
+
+        //remove tempo.txt
+        
+        remove(tempo);
+
+        //informate the user
+        
+        printf("the number of %s have been changed to %s", name, number);
+
+    }
+    
 }
