@@ -311,7 +311,7 @@ void remove_function(void){
         fprintf(tempo, "%s\n", output);
     }
 
-    //clos file pointer
+    //close file pointer
 
     fclose(ptr);
     fclose(tempo);
