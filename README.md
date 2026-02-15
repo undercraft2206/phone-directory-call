@@ -1,8 +1,9 @@
-next update: fix bug and warning !
+##next update !
+next update: fix bug and warning ! 🐛
 
 
 
-##installation
+##installation ⬇️
 
 
 you can compile it with gcc or make
