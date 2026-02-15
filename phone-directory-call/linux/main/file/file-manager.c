@@ -223,7 +223,7 @@ void remove_function(void){
     //make var
 
     char name[60];
-    char output[2000];
+    char output[70];
 
     //make file pointer
 
@@ -310,7 +310,7 @@ void remove_function(void){
         fprintf(tempo, "%s\n", output);
     }
 
-    //close file pointer
+    //clos file pointer
 
     fclose(ptr);
     fclose(tempo);
@@ -369,12 +369,12 @@ void rename_function(void){
 
     //make a var
     
-    char choice[6];
+    char choice[10];
 
     //ask the user
 
     printf("\nname or number: ");
-    scanf("%s", &choice);
+    scanf("%s", &choice[0]);
 
     //if user say "name"
 
@@ -388,10 +388,10 @@ void rename_function(void){
         //ask user informatiown
         
         printf("\nname to change: ");
-        scanf("%s", &name);
+        scanf("%s", &name[0]);
 
         printf("name: ");
-        scanf("%s", &change);
+        scanf("%s", &change[0]);
 
         system("clear");
         printf("function: rename\nname: %s to %s\n\n", name, change);
@@ -608,10 +608,10 @@ void rename_function(void){
         //ask user information
 
         printf("which number (name): ");
-        scanf("%s", &name);
+        scanf("%s", &name[0]);
         
         printf("the new number will be: ");
-        scanf("%s", &number);
+        scanf("%s", &number[0]);
 
         //copy phone.txt to tempo.txt with change
 
@@ -745,7 +745,7 @@ void rename_function(void){
 
         //remove tempo.txt
         
-        remove(tempo);
+        remove("tempo.txt");
 
         //informate the user
         
