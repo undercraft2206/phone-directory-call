@@ -38,3 +38,7 @@ gcc main.c -o phone_directory
 ```
 
 # programmation language
+
+**Core Language:**
+
+![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
