@@ -224,7 +224,6 @@ void remove_function(void){
 
     char name[60];
     char output[2000];
-    char clone[2000];
 
     //make file pointer
 
