@@ -9,7 +9,7 @@ void add_function(void){
 
     //clear the cli and say the name of function
 
-    system("cls");
+    system("cls0");
     printf("function add\n\n");
 
     //make file pointer
@@ -47,7 +47,7 @@ void add_function(void){
 void list_function(void){
 
     //make file pointer and var
-    
+
     char output[2000];
     FILE *ptr;
 
@@ -97,7 +97,7 @@ void list_function(void){
             //then stop the while
 
             break;
-        
+
         }
 
         //print the result
@@ -105,7 +105,7 @@ void list_function(void){
         printf("\n%s", output);
 
         fscanf(ptr, "%s", output);
-        
+
         if(strcmp(output, "end") == 0){
             break;
         }
@@ -123,7 +123,7 @@ void list_function(void){
 //search function
 
 void search_function(void){
-    
+
     //make var
 
     char name[60];
@@ -143,7 +143,7 @@ void search_function(void){
     if (ptr == NULL) {
 
         //informate the user
-        
+
         perror("file not found");
         printf("creating the file...");
 
@@ -154,7 +154,7 @@ void search_function(void){
         //informate the user
 
         printf("file created !");
-        
+
         //go to the end of the file
 
         goto end;
@@ -167,7 +167,7 @@ void search_function(void){
 
     //print function and name searched
 
-    system("cls");
+    system("clear");
     printf("searching: %s\nfunction search\n\n", name);
 
     //start the search
@@ -204,13 +204,13 @@ void search_function(void){
         //informate the user
 
         printf("\n\nsorry... we don't have found any %s in the file", name);
-    
+
     } else {
-    
+
         //informate the user
 
         printf("\n\nwe found the name %s %d time\n\n", name, num);
-    
+
     }
 
     end:
@@ -219,7 +219,7 @@ void search_function(void){
 //remove function
 
 void remove_function(void){
-    
+
     //make var
 
     char name[60];
@@ -244,7 +244,7 @@ void remove_function(void){
 
         perror("file not found");
         printf("creating one...\n");
-    
+
         //open the file in write mode for create the file
 
         fopen("phone.txt", "w");
@@ -265,7 +265,7 @@ void remove_function(void){
 
     //print name of function and the name who will be removed
 
-    system("cls");
+    system("clear");
     printf("function: remove\nremoving: %s\n\n", name);
 
     //start the while
@@ -280,9 +280,9 @@ void remove_function(void){
         startwhile:
 
         if (strcmp(name, output) == 0) {
-            
+
             //scan for the next nale
-        
+
             fscanf(ptr, "%s", output);
             fscanf(ptr, "%s", output);
             fscanf(ptr, "%s", output);
@@ -296,13 +296,13 @@ void remove_function(void){
         //if output match with string: "name:" or "number:"
 
         if ((strcmp(output, "name:") == 0) || (strcmp(output, "number:") == 0)) {
-            
+
             //scan for next word
 
             fscanf(ptr, "%s", output);
-            
+
             //goto start of the while
-            
+
             goto startwhile;
         }
 
@@ -311,7 +311,7 @@ void remove_function(void){
         fprintf(tempo, "%s\n", output);
     }
 
-    //clos file pointer
+    //close file pointer
 
     fclose(ptr);
     fclose(tempo);
@@ -328,13 +328,13 @@ void remove_function(void){
         //scan for word in tempo.txt
 
         fscanf(tempo, "%s", output);
-        
+
         //look if output match with "end"
 
         if (strcmp(output, "end") == 0){
 
             //then exit the while
-            
+
             break;
 
         }
@@ -369,7 +369,7 @@ void remove_function(void){
 void rename_function(void){
 
     //make a var
-    
+
     char choice[6];
 
     //ask the user
@@ -382,12 +382,12 @@ void rename_function(void){
     if(strcmp(choice, "name") == 0){
 
         //make var
-        
+
         char name[60];
         char change[60];
 
         //ask user informatiown
-        
+
         printf("\nname to change: ");
         scanf("%s", &name);
 
@@ -434,7 +434,7 @@ void rename_function(void){
             fclose(ptr);
             fclose(tempo);
             remove("tempo.txt");
-            
+
             //exit
 
             exit(0);
@@ -444,7 +444,7 @@ void rename_function(void){
 
         //start the copy to tempo.txt
 
-        while(!feof(ptr) == 1){
+        while(!feof(ptr)){
 
             start:
 
@@ -473,11 +473,11 @@ void rename_function(void){
             //check for name or number
 
             if(strcmp(output, "name:") == 0 || strcmp(output, "number:") == 0){
-              
+
                 //scan for the next word
 
                 fscanf(ptr, "%s", output);
-            
+
             }
 
             //check if the word is the name wanted
@@ -496,7 +496,7 @@ void rename_function(void){
                 //print word
 
                 fprintf(tempo, "%s\n", output);
-             
+
                 //goto the start of while
 
                 goto start;
@@ -530,7 +530,7 @@ void rename_function(void){
                 //stop the while
 
                 break;
-            
+
             }
 
             //print word to phone.txt
@@ -538,14 +538,14 @@ void rename_function(void){
             fprintf(ptr, "name: %s\n", output);
 
             fscanf(tempo, "%s", output);
-            
+
             if (strcmp(output, "end") == 0)
             {
                break;
             }
 
             fprintf(ptr, "number: %s\n\n", output);
-     
+
         }
 
         //print the end of the file tempo.txt
@@ -562,4 +562,196 @@ void rename_function(void){
 
         printf("the name '%s' have been changed to '%s'", name, change);        
     }
+
+
+    if (strcmp(choice, "number") == 0)
+    {
+
+        char output[2000];
+        char name[60];
+        char number[60];
+
+        FILE *ptr;
+        FILE *tempo;
+
+        ptr = fopen("phone.txt", "r");
+        tempo = fopen("tempo.txt", "w");
+
+        if (ptr == NULL)
+        {
+
+            //informate the user
+
+            perror("file not found");
+            printf("creating one...\n");
+
+            //create the file
+
+            ptr = fopen("phone.txt", "w");
+            fprintf(ptr, "\nend");
+
+            //say to the user, file created !
+
+            printf("file created succesfully !");
+
+            //close file and delete tempo file
+
+            fclose(ptr);
+            fclose(tempo);
+            remove("tempo.txt");
+
+            //exit
+
+            exit(0);
+
+        }
+
+        //ask user information
+
+        printf("which number (name): ");
+        scanf("%s", &name);
+
+        printf("the new number will be: ");
+        scanf("%s", &number);
+
+        //copy phone.txt to tempo.txt with change
+
+        while (!feof(ptr))
+        {
+
+            //scan word in phone.txt
+
+            fscanf(ptr, "%s", output);
+
+            startverif:
+
+            //does the word is "end"
+
+            if (strcmp(output, "end") == 0)
+            {
+
+                //then stop the while
+
+                break;
+
+            }
+
+            //does the word match with the name searched
+
+            if (strcmp(output, name) == 0)
+            {
+
+                //print result to tempo.txt
+
+                fprintf(tempo, "%s\n%s\n", name, number);
+
+                //scan for next word
+
+                fscanf(ptr, "%s", output);
+                fscanf(ptr, "%s", output);
+                fscanf(ptr, "%s", output);
+
+                //go to startverif
+
+                goto startverif;
+            }
+
+            //does the word match with "name:" or "number:"
+
+            if (strcmp(output, "name:") == 0 || strcmp(output, "number:") == 0)
+            {
+
+                //scan the next word
+
+                fscanf(ptr, "%s", output);
+
+                //go to startverif
+
+                goto startverif;
+            }
+
+            //print result to tempo file
+
+            fprintf(tempo, "%s\n", output);
+
+        }
+
+        //print the end of the file
+
+        fprintf(tempo, "\n\nend");
+
+        //close file pointer
+
+        fclose(ptr);
+        fclose(tempo);
+
+        //open file for clear the file phone.txt
+
+        ptr = fopen("phone.txt", "w");
+        tempo = fopen("tempo.txt", "r");
+
+        //copy file tempo.txt to phone.txt
+
+        while (!feof(tempo))
+        {
+
+            //scan for next word
+
+            fscanf(tempo, "%s", output);
+
+            //does the word match with "end"
+
+            if (strcmp(output, "end") == 0)
+            {
+
+                //exit the while
+
+                break;
+
+            }
+
+            //print result to phone.txt
+
+            fprintf(ptr, "name: %s", output);
+
+            //scan for next word
+
+            fscanf(tempo, "%s", output);
+
+            //does the word match with "end"
+
+            if (strcmp(output, "end") == 0)
+            {
+
+                //exit the while
+
+                break;
+
+            }
+
+            //print result to phone.txt
+
+            fprintf(ptr, "\nnumber: %s\n\n", output);
+
+        }
+
+        //print the end of the file
+
+        fprintf(ptr, "end");
+
+        //close file pointer
+
+        fclose(ptr);
+        fclose(tempo);
+
+        //remove tempo.txt
+
+        remove(tempo);
+
+        //informate the user
+
+        printf("the number of %s have been changed to %s", name, number);
+
+    }
+
 }
